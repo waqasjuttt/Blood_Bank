@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/user"
+            android:title="My Account" />
+
+        <item
+            android:id="@+id/search_blood"
+            android:icon="@drawable/blood"
+            android:title="Blood Donors" />
+
+        <item
+            android:id="@+id/add_blood_request"
+            android:icon="@drawable/request"
+            android:title="Add Blood Request" />
+
+        <item
+            android:id="@+id/blood_banks"
+            android:icon="@drawable/blood_bank"
+            android:title="Blood Banks" />
+
+        <item
+            android:id="@+id/search_city"
+            android:icon="@drawable/city"
+            android:title="Search by City" />
+
+        <item
+            android:id="@+id/about_us"
+            android:icon="@drawable/about_us"
+            android:title="About Us" />
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Sign Out" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Communicate">
+            <menu>
+                <item
+                    android:id="@+id/contact_us"
+                    android:icon="@drawable/contact_us"
+                    android:title="Contact Us" />
+                <item
+                    android:id="@+id/share_app"
+                    android:icon="@drawable/share"
+                    android:title="Share App" />
+            </menu>
+        </item>
+    </group>
+</menu>
