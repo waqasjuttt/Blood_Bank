@@ -165,9 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.blood_banks) {
             Toast.makeText(MainActivity.this, "Blood Banks", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
-        } else if (id == R.id.search_city) {
-            Toast.makeText(MainActivity.this, "Search Blood by City", Toast.LENGTH_SHORT).show();
-            setTextColorForMenuItem(item, R.color.colorAccent);
         } else if (id == R.id.about_us) {
             Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);

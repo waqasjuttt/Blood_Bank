@@ -28,11 +28,6 @@
             android:title="Blood Banks" />
 
         <item
-            android:id="@+id/search_city"
-            android:icon="@drawable/city"
-            android:title="Search by City" />
-
-        <item
             android:id="@+id/about_us"
             android:icon="@drawable/about_us"
             android:title="About Us" />

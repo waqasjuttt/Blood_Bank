@@ -3,7 +3,7 @@
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.waqasjutt.blood_bank.Add_Donors_Details.Add_Donors_Fragment">
+    tools:context="com.example.waqasjutt.blood_bank.Add_Donors_Details.A_Plus_Blood_Fragment">
 
     <ListView
         android:id="@+id/recyclerView"

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/tv_Ap"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="A+"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_An"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="A-"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/tv_Bp"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="B+"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_Bn"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="B-"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/tv_ABp"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="AB+"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_ABn"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="AB-"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/tv_Op"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="O+"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_On"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:background="@drawable/blood_types_selector"
+                android:gravity="center"
+                android:text="O-"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

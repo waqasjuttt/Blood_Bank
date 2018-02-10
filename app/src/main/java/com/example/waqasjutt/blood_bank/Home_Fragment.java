@@ -26,7 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.waqasjutt.blood_bank.Add_Donors_Details.Add_Donors_Fragment;
+import com.example.waqasjutt.blood_bank.Add_Donors_Details.A_Plus_Blood_Fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +43,6 @@ public class Home_Fragment extends Fragment {
     private String[] values = {
             "Blood Donors"
             , "Add Blood Request"
-            , "Search by City"
             , "Blood Banks"
             , "Share App"
             , "Contact Us"
@@ -51,7 +50,6 @@ public class Home_Fragment extends Fragment {
     private int[] images = {
             R.drawable.blood
             , R.drawable.request
-            , R.drawable.city
             , R.drawable.blood_bank
             , R.drawable.share
             , R.drawable.contact_us
@@ -108,36 +106,36 @@ public class Home_Fragment extends Fragment {
                 if (position == 0) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
-                            .replace(R.id.container, new Add_Donors_Fragment());
+                            .replace(R.id.container, new Blood_Types());
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            ((TextView) v.findViewById(R.id.grid_item_label))
-                                    .getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(
+//                            getActivity().getApplicationContext(),
+//                            ((TextView) v.findViewById(R.id.grid_item_label))
+//                                    .getText(), Toast.LENGTH_SHORT).show();
                 } else if (position == 1) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
-                            .replace(R.id.container, new Add_Donors_Fragment());
+                            .replace(R.id.container, new A_Plus_Blood_Fragment());
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            ((TextView) v.findViewById(R.id.grid_item_label))
-                                    .getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(
+//                            getActivity().getApplicationContext(),
+//                            ((TextView) v.findViewById(R.id.grid_item_label))
+//                                    .getText(), Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
-                            .replace(R.id.container, new Add_Donors_Fragment());
+                            .replace(R.id.container, new A_Plus_Blood_Fragment());
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            ((TextView) v.findViewById(R.id.grid_item_label))
-                                    .getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(
+//                            getActivity().getApplicationContext(),
+//                            ((TextView) v.findViewById(R.id.grid_item_label))
+//                                    .getText(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

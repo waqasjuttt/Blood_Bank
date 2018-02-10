@@ -30,14 +30,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Add_Donors_Fragment extends Fragment {
+public class A_Plus_Blood_Fragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
     private ArrayAdapter<String> adapter;
     private ListView recyclerView;
 
-    public Add_Donors_Fragment() {
+    public A_Plus_Blood_Fragment() {
         // Required empty public constructor
     }
 
@@ -82,7 +82,7 @@ public class Add_Donors_Fragment extends Fragment {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, Paths.DONORS_LIST_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, Paths.A_PLUS_DONORS_LIST_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
