@@ -1,6 +1,5 @@
 package com.example.waqasjutt.blood_bank;
 
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -37,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class VerifyAccount_Fragment extends Fragment implements View.OnClickListener {
+public class Verification_Fragment_For_ForgetPassword extends Fragment implements View.OnClickListener {
 
     private View view;
     private Dialog dialog;
@@ -54,7 +53,7 @@ public class VerifyAccount_Fragment extends Fragment implements View.OnClickList
     private FirebaseAuth.AuthStateListener authStateListener;
     private ProgressDialog progressDialog;
 
-    public VerifyAccount_Fragment() {
+    public Verification_Fragment_For_ForgetPassword() {
         // Required empty public constructor
     }
 
@@ -189,7 +188,7 @@ public class VerifyAccount_Fragment extends Fragment implements View.OnClickList
                             progressDialog.dismiss();
                             fragmentTransaction = fragmentManager
                                     .beginTransaction()
-                                    .replace(R.id.container, new Password_Fragment()
+                                    .replace(R.id.container, new ResetPassword_Fragment()
                                             , Utils.Password_Fragment);
                             fragmentTransaction
                                     .addToBackStack(null)

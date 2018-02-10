@@ -1,32 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#e7d1d1"
     tools:context="com.example.waqasjutt.blood_bank.Home_Fragment">
 
-    <TextView
-        android:background="#e7d1d1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="Welcome to Blood Bank Pakistan"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <GridView
-        android:background="#ffffff"
-        android:id="@+id/gridView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="150dp"
-        android:gravity="center"
-        android:numColumns="auto_fit"></GridView>
+        android:layout_height="match_parent"
+        android:background="#e7d1d1"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="50dp"
+            android:background="#e7d1d1"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Welcome to Blood Bank Pakistan"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:columnWidth="150dp"
+            android:gravity="center"
+            android:numColumns="auto_fit"></GridView>
+    </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

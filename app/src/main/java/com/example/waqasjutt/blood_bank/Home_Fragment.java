@@ -4,10 +4,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,7 @@ public class Home_Fragment extends Fragment {
             , R.drawable.contact_us
             , R.drawable.about_us};
     private LinearLayout Home_Linearlaoyout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public Home_Fragment() {
         // Required empty public constructor
@@ -139,6 +142,22 @@ public class Home_Fragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
+                        checkInternet();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 4000);
+            }
+        });
+
         return view;
     }
 
@@ -158,6 +177,7 @@ public class Home_Fragment extends Fragment {
                                         .getUserData(
                                                 obj.getString("id"),
                                                 obj.getString("name"),
+                                                obj.getString("mobile"),
                                                 obj.getString("city"),
                                                 obj.getString("address"),
                                                 obj.getString("blood_group"),

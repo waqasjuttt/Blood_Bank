@@ -226,6 +226,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener {
                                     SharedPrefManager.getInstance(getActivity()).getUserData(
                                             jsonObject.getString("id"),
                                             jsonObject.getString("name"),
+                                            jsonObject.getString("mobile"),
                                             jsonObject.getString("city"),
                                             jsonObject.getString("address"),
                                             jsonObject.getString("blood_group"),

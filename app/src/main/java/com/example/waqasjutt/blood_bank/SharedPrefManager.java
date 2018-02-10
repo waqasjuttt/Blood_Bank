@@ -32,6 +32,7 @@ public class SharedPrefManager {
 
     public boolean getUserData(String id,
                                String name,
+                               String mobile,
                                String city,
                                String address,
                                String bloodGroup,
@@ -41,6 +42,7 @@ public class SharedPrefManager {
 
         editor.putString(KEY_USER_ID, id);
         editor.putString(KEY_FULL_NAME, name);
+        editor.putString(KEY_MOBILE, mobile);
         editor.putString(KEY_CITY, city);
         editor.putString(KEY_ADDRESS, address);
         editor.putString(KEY_BLOOD, bloodGroup);

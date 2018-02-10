@@ -70,7 +70,6 @@ public class Add_Donors_Fragment extends Fragment {
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
                         checkInternet();
                         swipeRefreshLayout.setRefreshing(false);
@@ -78,10 +77,6 @@ public class Add_Donors_Fragment extends Fragment {
                 }, 4000);
             }
         });
-//        swipeRefreshLayout.setColorSchemeColors(android.R.color.holo_green_dark,
-//                android.R.color.holo_red_dark,
-//                android.R.color.holo_blue_dark,
-//                android.R.color.holo_orange_dark);
 
         return view;
     }

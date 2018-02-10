@@ -120,11 +120,20 @@ public class Forget_Password_Fragment extends Fragment implements View.OnClickLi
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("mobile", et_Mobile_Search.getText().toString()).commit();
                                     Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+//                                    fragmentTransaction =
+//                                            fragmentManager
+//                                                    .beginTransaction()
+//                                                    .replace(R.id.container,
+//                                                            new ResetPassword_Fragment());
+//                                    fragmentTransaction
+//                                            .addToBackStack(null)
+//                                            .commit();
+
                                     fragmentTransaction =
                                             fragmentManager
                                                     .beginTransaction()
                                                     .replace(R.id.container,
-                                                            new VerifyAccount_Fragment());
+                                                            new Verification_Fragment_For_ForgetPassword());
                                     fragmentTransaction
                                             .addToBackStack(null)
                                             .commit();
