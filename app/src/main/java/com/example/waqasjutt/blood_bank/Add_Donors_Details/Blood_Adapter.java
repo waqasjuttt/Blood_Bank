@@ -1,4 +1,4 @@
-package com.example.waqasjutt.blood_bank;
+package com.example.waqasjutt.blood_bank.Add_Donors_Details;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqasjutt.blood_bank.Add_Donors_Details.Blood_Items;
+import com.example.waqasjutt.blood_bank.R;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.example.waqasjutt.blood_bank.Add_Donors_Details;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.waqasjutt.blood_bank.Blood_Adapter;
 import com.example.waqasjutt.blood_bank.MainActivity;
 import com.example.waqasjutt.blood_bank.Paths;
 import com.example.waqasjutt.blood_bank.R;
@@ -31,7 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Add_Donors_Fragment extends Fragment {
 
