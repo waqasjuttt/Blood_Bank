@@ -1,14 +1,35 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.waqasjutt.blood_bank.Add_Donors_Details.A_Plus_Blood_Fragment">
 
-    <ListView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp" />
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_Search_City"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/search_red"
+            android:background="@drawable/search_background"
+            android:hint="Search by city" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

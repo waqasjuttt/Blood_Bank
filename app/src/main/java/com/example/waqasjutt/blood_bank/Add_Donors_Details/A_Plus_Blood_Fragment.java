@@ -6,12 +6,21 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,13 +38,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class A_Plus_Blood_Fragment extends Fragment {
-
+    //implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener{
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
-    private ArrayAdapter<String> adapter;
-    private ListView recyclerView;
+    private Blood_Adapter blood_adapter;
+    private ListView listView;
+    private EditText et_search;
 
     public A_Plus_Blood_Fragment() {
         // Required empty public constructor
@@ -56,8 +67,30 @@ public class A_Plus_Blood_Fragment extends Fragment {
 
         getActivity().setTitle("Blood Donors");
 
-        recyclerView = (ListView) view.findViewById(R.id.recyclerView);
+        listView = (ListView) view.findViewById(R.id.listView);
+
+        et_search = (EditText) view.findViewById(R.id.et_Search_City);
+
+        listView.setTextFilterEnabled(true);
+
         checkInternet();
+
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                blood_adapter.getFilter().filter(charSequence);
+                blood_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
@@ -72,6 +105,21 @@ public class A_Plus_Blood_Fragment extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 4000);
+            }
+        });
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int topRowVerticalPosition =
+                        (listView == null || listView.getChildCount() == 0) ?
+                                0 : listView.getChildAt(0).getTop();
+                swipeRefreshLayout.setEnabled(firstVisibleItem == 0 && topRowVerticalPosition >= 0);
             }
         });
 
@@ -105,8 +153,8 @@ public class A_Plus_Blood_Fragment extends Fragment {
                                     blood_items.setAddress(jsonObject.getString("address"));
                                     blood_itemsArrayList.add(blood_items);
                                 }
-                                Blood_Adapter adapter = new Blood_Adapter(getActivity(), R.layout.blood_item_details, blood_itemsArrayList);
-                                recyclerView.setAdapter(adapter);
+                                blood_adapter = new Blood_Adapter(getActivity(), R.layout.blood_item_details, blood_itemsArrayList);
+                                listView.setAdapter(blood_adapter);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -125,4 +173,54 @@ public class A_Plus_Blood_Fragment extends Fragment {
             Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_LONG).show();
         }
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_search, menu);
+//        MenuItem searchItem = menu.findItem(R.id.item_search);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchView.setOnQueryTextListener(this);
+//        searchView.setQueryHint("Search");
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        return true;
+//    }
+
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        if (newText == null || newText.trim().isEmpty()) {
+//            checkInternet();
+//            return false;
+//        }
+//
+//        List<String> filteredValues = new ArrayList<String>(blood_adapter.getCount());
+//        for (String value : blood_adapter.getCount()) {
+//            if (!value.toLowerCase().contains(newText.toLowerCase())) {
+//                filteredValues.remove(value);
+//            }
+//        }
+//
+//        blood_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, filteredValues);
+//        setListAdapter(mAdapter);
+//
+//        return false;
+//    }
+
+//    public void resetSearch() {
+//        blood_adapter = new Blood_Adapter(getActivity(), R.layout.blood_item_details, blood_itemsArrayList);
+//        recyclerView.setAdapter(blood_adapter);
+//    }
+
+//    @Override
+//    public boolean onMenuItemActionExpand(MenuItem menuItem) {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+//        return false;
+//    }
 }

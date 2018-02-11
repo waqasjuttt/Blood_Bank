@@ -4,7 +4,6 @@
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e7d1d1"
     tools:context="com.example.waqasjutt.blood_bank.Home_Fragment">
 
     <LinearLayout

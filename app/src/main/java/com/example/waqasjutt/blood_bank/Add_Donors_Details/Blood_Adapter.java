@@ -12,25 +12,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waqasjutt.blood_bank.Add_Donors_Details.Blood_Items;
 import com.example.waqasjutt.blood_bank.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Blood_Adapter extends ArrayAdapter {
+public class Blood_Adapter extends ArrayAdapter implements Filterable {
 
-    private Context mCtx;
-    private List<Blood_Items> blood_itemses;
-    private int resource;
+    Context mCtx;
+    List<Blood_Items> blood_itemses, filterList;
+    CustomFilter filter;
+    int resource;
 
     public Blood_Adapter(Context mCtx, int resource, List<Blood_Items> blood_itemses) {
         super(mCtx, resource, blood_itemses);
         this.mCtx = mCtx;
         this.resource = resource;
         this.blood_itemses = blood_itemses;
+        this.filterList = blood_itemses;
     }
 
     @NonNull
@@ -85,5 +90,15 @@ public class Blood_Adapter extends ArrayAdapter {
     @Override
     public int getCount() {
         return blood_itemses.size();
+    }
+
+    //RETURN FILTER OBJ
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new CustomFilter((ArrayList<Blood_Items>) filterList, this);
+        }
+
+        return filter;
     }
 }
