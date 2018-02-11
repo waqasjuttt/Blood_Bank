@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class A_Plus_Blood_Fragment extends Fragment {
-    //implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener{
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
     private Blood_Adapter blood_adapter;
@@ -173,54 +172,4 @@ public class A_Plus_Blood_Fragment extends Fragment {
             Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_LONG).show();
         }
     }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu_search, menu);
-//        MenuItem searchItem = menu.findItem(R.id.item_search);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//        searchView.setOnQueryTextListener(this);
-//        searchView.setQueryHint("Search");
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
-//
-//    @Override
-//    public boolean onQueryTextSubmit(String query) {
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onQueryTextChange(String newText) {
-//        if (newText == null || newText.trim().isEmpty()) {
-//            checkInternet();
-//            return false;
-//        }
-//
-//        List<String> filteredValues = new ArrayList<String>(blood_adapter.getCount());
-//        for (String value : blood_adapter.getCount()) {
-//            if (!value.toLowerCase().contains(newText.toLowerCase())) {
-//                filteredValues.remove(value);
-//            }
-//        }
-//
-//        blood_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, filteredValues);
-//        setListAdapter(mAdapter);
-//
-//        return false;
-//    }
-
-//    public void resetSearch() {
-//        blood_adapter = new Blood_Adapter(getActivity(), R.layout.blood_item_details, blood_itemsArrayList);
-//        recyclerView.setAdapter(blood_adapter);
-//    }
-
-//    @Override
-//    public boolean onMenuItemActionExpand(MenuItem menuItem) {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-//        return false;
-//    }
 }
