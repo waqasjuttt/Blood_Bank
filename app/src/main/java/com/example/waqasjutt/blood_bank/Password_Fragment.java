@@ -202,8 +202,9 @@ public class Password_Fragment extends Fragment implements View.OnClickListener 
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.hide();
-                                TastyToast.makeText(getActivity(), "Server is not responding..."
-                                        , Toast.LENGTH_LONG, TastyToast.ERROR).show();
+                                if (getActivity() != null) {
+                                    Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }) {
                     @Override

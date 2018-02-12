@@ -250,9 +250,9 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressDialog.dismiss();
-                            Toast.makeText(getActivity(),
-                                    "Server is not responding...",
-                                    Toast.LENGTH_SHORT).show();
+                            if (getActivity() != null) {
+                                Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
             ) {

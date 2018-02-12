@@ -52,9 +52,7 @@ public class Blood_Types extends Fragment {
                 fragmentTransaction = fragmentManager
                         .beginTransaction()
                         .replace(R.id.container, new A_Plus_Blood_Fragment());
-                fragmentTransaction
-                        .addToBackStack(null)
-                        .commit();
+                fragmentTransaction.addToBackStack(null).commit();
             }
         });
     }

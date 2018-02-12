@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class A_Plus_Blood_Fragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -67,13 +68,12 @@ public class A_Plus_Blood_Fragment extends Fragment {
         getActivity().setTitle("Blood Donors");
 
         listView = (ListView) view.findViewById(R.id.listView);
-
         et_search = (EditText) view.findViewById(R.id.et_Search_City);
+        et_search.setVisibility(View.GONE);
 
         listView.setTextFilterEnabled(true);
 
         checkInternet();
-
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -129,11 +129,17 @@ public class A_Plus_Blood_Fragment extends Fragment {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+            et_search.setEnabled(false);
+            et_search.setVisibility(View.GONE);
+            listView.setVisibility(View.GONE);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, Paths.A_PLUS_DONORS_LIST_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
+                                listView.setVisibility(View.VISIBLE);
+                                et_search.setEnabled(true);
+                                et_search.setVisibility(View.VISIBLE);
                                 ArrayList<Blood_Items> blood_itemsArrayList = new ArrayList<>();
                                 //converting the string to json array object
                                 JSONArray array = new JSONArray(response);
@@ -162,14 +168,20 @@ public class A_Plus_Blood_Fragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                            if (getActivity() != null) {
+                                listView.setVisibility(View.GONE);
+                                et_search.setEnabled(false);
+                                et_search.setVisibility(View.GONE);
+                                Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
-
             //adding our stringrequest to queue
             Volley.newRequestQueue(getActivity()).add(stringRequest);
         } else {
             Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_LONG).show();
+            et_search.setEnabled(false);
+            et_search.setVisibility(View.GONE);
         }
     }
 }

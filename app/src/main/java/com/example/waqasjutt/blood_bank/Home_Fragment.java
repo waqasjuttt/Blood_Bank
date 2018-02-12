@@ -13,6 +13,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -107,9 +108,7 @@ public class Home_Fragment extends Fragment {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
                             .replace(R.id.container, new Blood_Types());
-                    fragmentTransaction
-                            .addToBackStack(null)
-                            .commit();
+                    fragmentTransaction.addToBackStack(null).commit();
 //                    Toast.makeText(
 //                            getActivity().getApplicationContext(),
 //                            ((TextView) v.findViewById(R.id.grid_item_label))
@@ -117,7 +116,7 @@ public class Home_Fragment extends Fragment {
                 } else if (position == 1) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
-                            .replace(R.id.container, new A_Plus_Blood_Fragment());
+                            .replace(R.id.container, new Add_Blood_Request_Fragment());
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
@@ -126,16 +125,10 @@ public class Home_Fragment extends Fragment {
 //                            ((TextView) v.findViewById(R.id.grid_item_label))
 //                                    .getText(), Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
-                    fragmentTransaction = fragmentManager
-                            .beginTransaction()
-                            .replace(R.id.container, new A_Plus_Blood_Fragment());
-                    fragmentTransaction
-                            .addToBackStack(null)
-                            .commit();
-//                    Toast.makeText(
-//                            getActivity().getApplicationContext(),
-//                            ((TextView) v.findViewById(R.id.grid_item_label))
-//                                    .getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(
+                            getActivity().getApplicationContext(),
+                            ((TextView) v.findViewById(R.id.grid_item_label))
+                                    .getText(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -153,6 +146,21 @@ public class Home_Fragment extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 4000);
+            }
+        });
+
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int topRowVerticalPosition =
+                        (gridView == null || gridView.getChildCount() == 0) ?
+                                0 : gridView.getChildAt(0).getTop();
+                swipeRefreshLayout.setEnabled(firstVisibleItem == 0 && topRowVerticalPosition >= 0);
             }
         });
 
@@ -189,6 +197,9 @@ public class Home_Fragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            if (getActivity() != null) {
+                                Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
             ) {

@@ -2,7 +2,6 @@ package com.example.waqasjutt.blood_bank;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentManager;
 
 
 public class SharedPrefManager {
@@ -15,8 +14,12 @@ public class SharedPrefManager {
     private static final String KEY_MOBILE = "mobile";
     private static final String KEY_DOB = "dob";
     private static final String KEY_ADDRESS = "address";
+    private static final String KEY_HOSPITAL = "hospital";
+    private static final String KEY_BLOOD_BAGS = "blood_bags";
     private static final String KEY_CITY = "city";
-    private static final String KEY_BLOOD = "blood_group";
+    private static final String KEY_BLOOD_TYPE = "blood_group";
+    private static final String KEY_CITY_REQUEST = "city_request";
+    private static final String KEY_BLOOD_TYPE_REQUEST = "blood_group_request";
     private static final String KEY_USER_ID = "userid";
 
     SharedPrefManager(Context context) {
@@ -28,6 +31,26 @@ public class SharedPrefManager {
             sharedPrefManager = new SharedPrefManager(context);
         }
         return sharedPrefManager;
+    }
+
+    public boolean getUserBloodRequest(
+            String name,
+            String mobile,
+            String bloodGroup,
+            String blood_bottle,
+            String city,
+            String hospital) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_FULL_NAME, name);
+        editor.putString(KEY_MOBILE, mobile);
+        editor.putString(KEY_BLOOD_TYPE_REQUEST, bloodGroup);
+        editor.putString(KEY_BLOOD_BAGS, blood_bottle);
+        editor.putString(KEY_CITY_REQUEST, city);
+        editor.putString(KEY_HOSPITAL, hospital);
+        editor.commit();
+        return true;
     }
 
     public boolean getUserData(String id,
@@ -45,7 +68,7 @@ public class SharedPrefManager {
         editor.putString(KEY_MOBILE, mobile);
         editor.putString(KEY_CITY, city);
         editor.putString(KEY_ADDRESS, address);
-        editor.putString(KEY_BLOOD, bloodGroup);
+        editor.putString(KEY_BLOOD_TYPE, bloodGroup);
         editor.putString(KEY_DOB, dob);
         editor.commit();
         return true;
@@ -84,6 +107,26 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_MOBILE, null);
     }
 
+    public String getCityRequest() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CITY_REQUEST, null);
+    }
+
+    public String getBloodTypeRequest() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_BLOOD_TYPE_REQUEST, null);
+    }
+
+    public String getHospital() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_HOSPITAL, null);
+    }
+
+    public String getBloodBags() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_BLOOD_BAGS, null);
+    }
+
     public String getID() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USER_ID, null);
@@ -101,7 +144,7 @@ public class SharedPrefManager {
 
     public String getBloodGroup() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_BLOOD, null);
+        return sharedPreferences.getString(KEY_BLOOD_TYPE, null);
     }
 
     public String getCity() {

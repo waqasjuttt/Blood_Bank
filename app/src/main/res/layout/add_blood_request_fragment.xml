@@ -1,9 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.waqasjutt.blood_bank.Profile_Fragment">
+    tools:context="com.example.waqasjutt.blood_bank.Add_Blood_Request_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,13 +24,23 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 android:hint="Full Name"
+                android:textColor="#f00"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="-10dp"
+            android:background="#000" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -49,11 +58,11 @@
         </android.support.design.widget.TextInputLayout>
 
         <View
-            android:layout_marginTop="-10dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="-10dp"
             android:background="#000" />
 
         <com.weiwangcn.betterspinner.library.BetterSpinner
@@ -65,51 +74,34 @@
             android:hint="Select City" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_Address"
+            android:id="@+id/layout_Hospital_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
             <EditText
-                android:id="@+id/et_Address"
+                android:id="@+id/et_Hospital_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your Address"
+                android:hint="Hospital Name"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_Blood_Request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:layout_marginRight="10dp">
 
-            <Button
-                android:id="@+id/btn_DOB"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_Blood_Request"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_button"
-                android:text="Pick Date"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_DOB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Pick your date of birth" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="#000" />
+                android:hint="Number of Blood Bags"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
 
         <com.weiwangcn.betterspinner.library.BetterSpinner
             android:id="@+id/BloodGroup"

@@ -115,10 +115,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (mToggle.onOptionsItemSelected(item)) {
             return true;
-        } else if (id == android.R.id.home) {
-            onBackPressed();
-            return true;
         }
+//        else if (id == android.R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -152,9 +153,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.search_blood) {
             Toast.makeText(MainActivity.this, "Search Blood", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
+            fragmentTransaction = fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container
+                            , new Blood_Types());
+            fragmentTransaction
+                    .addToBackStack(null)
+                    .commit();
         } else if (id == R.id.add_blood_request) {
             Toast.makeText(MainActivity.this, "Add Blood Request", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
+            fragmentTransaction = fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, new Add_Blood_Request_Fragment());
+            fragmentTransaction
+                    .addToBackStack(null)
+                    .commit();
         } else if (id == R.id.blood_banks) {
             Toast.makeText(MainActivity.this, "Blood Banks", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);

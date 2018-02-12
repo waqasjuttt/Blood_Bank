@@ -71,7 +71,7 @@ public class Signup_Fragment extends Fragment implements View.OnClickListener {
         if (((MainActivity) getActivity()).getSupportActionBar() != null) {
             ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             ((MainActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
-            ((MainActivity)getActivity()).drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            ((MainActivity) getActivity()).drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
 
         getActivity().setTitle("Sign Up");
@@ -198,8 +198,9 @@ public class Signup_Fragment extends Fragment implements View.OnClickListener {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.hide();
-                                TastyToast.makeText(getActivity(), "Server is not responding..."
-                                        , Toast.LENGTH_LONG, TastyToast.ERROR).show();
+                                if (getActivity() != null) {
+                                    Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }) {
                     @Override
