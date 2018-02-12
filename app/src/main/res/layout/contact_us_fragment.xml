@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.waqasjutt.blood_bank.Contact_Us_Fragment">
+
+    <LinearLayout
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:id="@+id/ContactUs_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/logo" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TextInputLayout_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/Margin_10"
+            app:hintTextAppearance="@style/TextInputLayout">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/ed_Name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/user_signup"
+                android:drawablePadding="@dimen/Margin_10"
+                android:gravity="center_vertical"
+                android:hint="Name"
+                android:inputType="text"
+                android:padding="@dimen/Margin_10"
+                android:singleLine="true"
+                android:textSize="@dimen/Text_Size_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/Line_Name"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="@dimen/Margin_10"
+            android:background="#000" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TextInputLayout_Subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/Margin_10"
+            app:hintTextAppearance="@style/TextInputLayout">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/ed_Subject"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/subject"
+                android:drawablePadding="@dimen/Margin_10"
+                android:gravity="center_vertical"
+                android:hint="Subject"
+                android:inputType="text"
+                android:padding="@dimen/Margin_10"
+                android:singleLine="true"
+                android:textSize="@dimen/Text_Size_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/Line_Subject"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="@dimen/Margin_10"
+            android:background="#000" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TextInputLayout_Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/Margin_10"
+            app:hintTextAppearance="@style/TextInputLayout">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/ed_Message"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/message"
+                android:drawablePadding="@dimen/Margin_10"
+                android:gravity="center_vertical"
+                android:hint="Message"
+                android:inputType="text"
+                android:padding="@dimen/Margin_10"
+                android:singleLine="true"
+                android:textSize="@dimen/Text_Size_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/Line_Message"
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="@dimen/Margin_10"
+            android:background="#000" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_button"
+            android:padding="3dp"
+            android:text="Send"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

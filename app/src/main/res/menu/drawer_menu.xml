@@ -18,6 +18,11 @@
             android:title="Blood Donors" />
 
         <item
+            android:id="@+id/blood_seeker"
+            android:icon="@drawable/blood_seeker"
+            android:title="Blood Seeker" />
+
+        <item
             android:id="@+id/add_blood_request"
             android:icon="@drawable/request"
             android:title="Add Blood Request" />

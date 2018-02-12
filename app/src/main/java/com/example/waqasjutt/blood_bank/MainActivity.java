@@ -1,28 +1,19 @@
 package com.example.waqasjutt.blood_bank;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuView;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -131,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            Toast.makeText(MainActivity.this, "HOME", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "HOME", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
             fragmentManager
                     .beginTransaction()
@@ -141,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.popBackStack(null
                     , FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else if (id == R.id.profile) {
-            Toast.makeText(MainActivity.this, "User Profile", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "User Profile", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
             fragmentTransaction = fragmentManager
                     .beginTransaction()
@@ -151,17 +142,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.search_blood) {
-            Toast.makeText(MainActivity.this, "Search Blood", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Search Blood", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
             fragmentTransaction = fragmentManager
                     .beginTransaction()
                     .replace(R.id.container
-                            , new Blood_Types());
+                            , new Blood_Types_For_Donors());
+            fragmentTransaction
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.blood_seeker) {
+//            Toast.makeText(MainActivity.this, "Blood Seeker", Toast.LENGTH_SHORT).show();
+            setTextColorForMenuItem(item, R.color.colorAccent);
+            fragmentTransaction = fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container
+                            , new Blood_Types_For_Seeker_Fragment());
             fragmentTransaction
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.add_blood_request) {
-            Toast.makeText(MainActivity.this, "Add Blood Request", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Add Blood Request", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
             fragmentTransaction = fragmentManager
                     .beginTransaction()
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction
                     .addToBackStack(null)
                     .commit();
-            Toast.makeText(MainActivity.this, "Blood Info", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Blood Info", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
         } else if (id == R.id.blood_banks) {
             fragmentTransaction = fragmentManager
@@ -185,13 +186,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction
                     .addToBackStack(null)
                     .commit();
-            Toast.makeText(MainActivity.this, "Blood Banks", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Blood Banks", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
         } else if (id == R.id.about_us) {
-            Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
+            Home_Fragment home_fragment = (Home_Fragment) getSupportFragmentManager().findFragmentByTag(Utils.Home_Fragment);
+            home_fragment.MyCustomAlertDialog();
         } else if (id == R.id.logout) {
-            Toast.makeText(MainActivity.this, "You Logout", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "You Logout", Toast.LENGTH_SHORT).show();
             SharedPrefManager.getInstance(MainActivity.this).Logout();
             fragmentManager.popBackStack(null
                     , FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -202,9 +205,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             , Utils.Login_Fragment)
                     .commit();
         } else if (id == R.id.contact_us) {
-            Toast.makeText(MainActivity.this, "Contact Us", Toast.LENGTH_SHORT).show();
+            fragmentTransaction = fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, new Contact_Us_Fragment());
+            fragmentTransaction
+                    .addToBackStack(null)
+                    .commit();
+//            Toast.makeText(MainActivity.this, "Contact Us", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.share_app) {
-            Toast.makeText(MainActivity.this, "Share App", Toast.LENGTH_SHORT).show();
+            String shareBody = "https://play.google.com/store/apps/details?id=************************";
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "APP NAME (Open it in Google Play Store to Download the Application)");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+//            Toast.makeText(MainActivity.this, "Share App", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);

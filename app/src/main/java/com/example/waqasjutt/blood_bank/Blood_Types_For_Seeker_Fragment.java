@@ -13,14 +13,14 @@ import android.widget.TextView;
 
 import com.example.waqasjutt.blood_bank.Add_Donors_Details.A_Plus_Blood_Fragment;
 
-public class Blood_Types extends Fragment {
+public class Blood_Types_For_Seeker_Fragment extends Fragment {
 
     private View view;
     private TextView tv_Ap, tv_An;
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
 
-    public Blood_Types() {
+    public Blood_Types_For_Seeker_Fragment() {
     }
 
     @Nullable

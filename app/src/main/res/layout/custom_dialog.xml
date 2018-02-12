@@ -19,6 +19,7 @@
             android:background="@drawable/close_button" />
 
         <TextView
+            android:id="@+id/tv_main_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -29,10 +30,10 @@
             android:textStyle="bold" />
 
         <View
-            android:layout_marginTop="5dp"
-            android:background="#000"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#000" />
 
         <TextView
             android:id="@+id/tv_Disclaimer"

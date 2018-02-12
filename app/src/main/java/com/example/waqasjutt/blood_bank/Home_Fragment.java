@@ -1,6 +1,8 @@
 package com.example.waqasjutt.blood_bank;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -13,9 +15,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +31,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.waqasjutt.blood_bank.Add_Donors_Details.A_Plus_Blood_Fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +40,11 @@ import java.util.Map;
 
 public class Home_Fragment extends Fragment {
 
+    private Dialog MyDialog;
+    private TextView tv_Disclaimer_Detail, tv_main_heading;
+    private Button btnAgree, btnNotAgree;
+    private ImageView btnClose;
+
     private View view;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -44,6 +52,7 @@ public class Home_Fragment extends Fragment {
     private String[] values = {
             "Blood Donors"
             , "Add Blood Request"
+            , "Blood Seeker"
             , "Blood Compatibility"
             , "Blood Banks"
             , "Share App"
@@ -52,6 +61,7 @@ public class Home_Fragment extends Fragment {
     private int[] images = {
             R.drawable.blood
             , R.drawable.request
+            , R.drawable.blood_seeker
             , R.drawable.info
             , R.drawable.blood_bank
             , R.drawable.share
@@ -109,7 +119,7 @@ public class Home_Fragment extends Fragment {
                 if (position == 0) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
-                            .replace(R.id.container, new Blood_Types());
+                            .replace(R.id.container, new Blood_Types_For_Donors());
                     fragmentTransaction.addToBackStack(null).commit();
 //                    Toast.makeText(
 //                            getActivity().getApplicationContext(),
@@ -122,32 +132,43 @@ public class Home_Fragment extends Fragment {
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
-//                    Toast.makeText(
-//                            getActivity().getApplicationContext(),
-//                            ((TextView) v.findViewById(R.id.grid_item_label))
-//                                    .getText(), Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
+                    fragmentTransaction = fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, new Blood_Types_For_Seeker_Fragment());
+                    fragmentTransaction
+                            .addToBackStack(null)
+                            .commit();
+                } else if (position == 3) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
                             .replace(R.id.container, new Blood_Types_Info());
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
-//                    Toast.makeText(
-//                            getActivity().getApplicationContext(),
-//                            ((TextView) v.findViewById(R.id.grid_item_label))
-//                                    .getText(), Toast.LENGTH_SHORT).show();
-                } else if (position == 3) {
+                } else if (position == 4) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
                             .replace(R.id.container, new Blood_Banks());
                     fragmentTransaction
                             .addToBackStack(null)
                             .commit();
-//                    Toast.makeText(
-//                            getActivity().getApplicationContext(),
-//                            ((TextView) v.findViewById(R.id.grid_item_label))
-//                                    .getText(), Toast.LENGTH_SHORT).show();
+                } else if (position == 5) {
+                    String shareBody = "https://play.google.com/store/apps/details?id=************************";
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "APP NAME (Open it in Google Play Store to Download the Application)");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                } else if (position == 6) {
+                    fragmentTransaction = fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, new Contact_Us_Fragment());
+                    fragmentTransaction
+                            .addToBackStack(null)
+                            .commit();
+                } else if (position == 7) {
+                    MyCustomAlertDialog();
                 }
             }
         });
@@ -233,6 +254,44 @@ public class Home_Fragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "Internet connection is required to use this App", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void MyCustomAlertDialog() {
+        MyDialog = new Dialog(getActivity());
+        MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        MyDialog.setContentView(R.layout.custom_dialog);
+
+        btnAgree = (Button) MyDialog.findViewById(R.id.btn_Agree);
+        btnNotAgree = (Button) MyDialog.findViewById(R.id.btn_Not_Agree);
+        btnClose = (ImageView) MyDialog.findViewById(R.id.btnClose);
+        tv_Disclaimer_Detail = (TextView) MyDialog.findViewById(R.id.tv_Disclaimer);
+        tv_main_heading = (TextView) MyDialog.findViewById(R.id.tv_main_heading);
+        tv_main_heading.setVisibility(View.GONE);
+
+        tv_Disclaimer_Detail.setText("*This Application is owned by Blood Bank Pakistan.\n" +
+                "*We have no legal obligation related to any information or database in this application.\n" +
+                "*Entire data and information is publicly exposed and developer/owner of this application is not responsible for any loss/damages.");
+        btnAgree.setEnabled(true);
+        btnAgree.setText("OK");
+
+        btnNotAgree.setEnabled(false);
+        btnNotAgree.setVisibility(View.GONE);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyDialog.dismiss();
+            }
+        });
+
+        btnAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDialog.dismiss();
+            }
+        });
+
+        MyDialog.show();
     }
 }
 
