@@ -169,7 +169,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction
                     .addToBackStack(null)
                     .commit();
+        } else if (id == R.id.blood_info) {
+            fragmentTransaction = fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, new Blood_Types_Info());
+            fragmentTransaction
+                    .addToBackStack(null)
+                    .commit();
+            Toast.makeText(MainActivity.this, "Blood Info", Toast.LENGTH_SHORT).show();
+            setTextColorForMenuItem(item, R.color.colorAccent);
         } else if (id == R.id.blood_banks) {
+            fragmentTransaction = fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, new Blood_Banks());
+            fragmentTransaction
+                    .addToBackStack(null)
+                    .commit();
             Toast.makeText(MainActivity.this, "Blood Banks", Toast.LENGTH_SHORT).show();
             setTextColorForMenuItem(item, R.color.colorAccent);
         } else if (id == R.id.about_us) {

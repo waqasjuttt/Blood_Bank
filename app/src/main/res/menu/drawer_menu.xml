@@ -23,6 +23,11 @@
             android:title="Add Blood Request" />
 
         <item
+            android:id="@+id/blood_info"
+            android:icon="@drawable/info"
+            android:title="Blood Info" />
+
+        <item
             android:id="@+id/blood_banks"
             android:icon="@drawable/blood_bank"
             android:title="Blood Banks" />

@@ -44,6 +44,7 @@ public class Home_Fragment extends Fragment {
     private String[] values = {
             "Blood Donors"
             , "Add Blood Request"
+            , "Blood Compatibility"
             , "Blood Banks"
             , "Share App"
             , "Contact Us"
@@ -51,6 +52,7 @@ public class Home_Fragment extends Fragment {
     private int[] images = {
             R.drawable.blood
             , R.drawable.request
+            , R.drawable.info
             , R.drawable.blood_bank
             , R.drawable.share
             , R.drawable.contact_us
@@ -125,10 +127,27 @@ public class Home_Fragment extends Fragment {
 //                            ((TextView) v.findViewById(R.id.grid_item_label))
 //                                    .getText(), Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            ((TextView) v.findViewById(R.id.grid_item_label))
-                                    .getText(), Toast.LENGTH_SHORT).show();
+                    fragmentTransaction = fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, new Blood_Types_Info());
+                    fragmentTransaction
+                            .addToBackStack(null)
+                            .commit();
+//                    Toast.makeText(
+//                            getActivity().getApplicationContext(),
+//                            ((TextView) v.findViewById(R.id.grid_item_label))
+//                                    .getText(), Toast.LENGTH_SHORT).show();
+                } else if (position == 3) {
+                    fragmentTransaction = fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, new Blood_Banks());
+                    fragmentTransaction
+                            .addToBackStack(null)
+                            .commit();
+//                    Toast.makeText(
+//                            getActivity().getApplicationContext(),
+//                            ((TextView) v.findViewById(R.id.grid_item_label))
+//                                    .getText(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
