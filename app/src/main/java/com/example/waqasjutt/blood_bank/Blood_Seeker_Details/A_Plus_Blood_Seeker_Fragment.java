@@ -20,9 +20,8 @@ public class A_Plus_Blood_Seeker_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.a_plus_blood_seeker_fragment, container, false);
+        view = inflater.inflate(R.layout.add_donors_fragment, container, false);
         getActivity().setTitle("Blood Seeker");
         return view;
     }
-
 }
