@@ -25,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
@@ -46,7 +47,7 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
     private static EditText et_name, et_hospital, et_mobile;
     @Bind(R.id.et_Blood_Request)
     EditText et_blood_bags;
-    private Button btnSave, btnResetValue;
+    private Button btnSaveBloodBags, btnResetValue;
     private String[] str_City = {"Lahore", "Multan", "Karachi", "Islamabad", "Sialkot"};
     private String[] str_Blood_Group = {"A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"};
     private ArrayAdapter<String> CityAdapter, BloodAdapter;
@@ -89,6 +90,14 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
         CitySpinner.setText(SharedPrefManager.getInstance(getActivity()).getCityRequest());
         BloodSpinner.setText(SharedPrefManager.getInstance(getActivity()).getBloodTypeRequest());
 
+//        Toast.makeText(getActivity(), "Name: " + SharedPrefManager.getInstance(getActivity()).getName()
+//                        + "\nMobile: " + SharedPrefManager.getInstance(getActivity()).getMobile()
+//                        + "\nHospital: " + SharedPrefManager.getInstance(getActivity()).getHospital()
+//                        + "\nCity: " + SharedPrefManager.getInstance(getActivity()).getCityRequest()
+//                        + "\nBlood Bags: " + SharedPrefManager.getInstance(getActivity()).getBloodBags()
+//                        + "\nBlood Type: " + SharedPrefManager.getInstance(getActivity()).getBloodTypeRequest()
+//                , Toast.LENGTH_LONG).show();
+
         return view;
     }
 
@@ -102,12 +111,12 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
     }
 
     private void setListners() {
-        btnSave.setOnClickListener(this);
+        btnSaveBloodBags.setOnClickListener(this);
         btnResetValue.setOnClickListener(this);
     }
 
     private void initComponents() {
-        btnSave = (Button) view.findViewById(R.id.btnSave);
+        btnSaveBloodBags = (Button) view.findViewById(R.id.btnSaveBloodBags);
         et_name = (EditText) view.findViewById(R.id.et_Name);
         et_mobile = (EditText) view.findViewById(R.id.et_Phone);
         et_hospital = (EditText) view.findViewById(R.id.et_Hospital_Name);
@@ -159,13 +168,8 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
                 et_hospital.setText("");
                 break;
 
-            case R.id.btnSave:
-                if (et_blood_bags.getText().toString().length() >= 11) {
-                    et_blood_bags.setError("You can add max 10 blood bags request.");
-//                    Toast.makeText(getActivity(), "You can add max 10 blood bags request.", Toast.LENGTH_SHORT).show();
-                } else {
-                    checkInternet();
-                }
+            case R.id.btnSaveBloodBags:
+                checkInternet();
                 break;
         }
     }
@@ -183,69 +187,66 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
 //                + "\nCity: " + strCity
 //                + "\nBlood: " + strBlood
 //                + "\nDOB: " + strDt, Toast.LENGTH_LONG).show();
-            if (et_blood_bags.getText().toString().length() <= 10) {
-                progressDialog.setMessage("Updating request...");
-                progressDialog.show();
-                progressDialog.setCanceledOnTouchOutside(false);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        "",
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                progressDialog.dismiss();
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    if (jsonObject.getString("error") == "false") {
-                                        TastyToast.makeText(getActivity(), jsonObject.getString("message")
-                                                , Toast.LENGTH_LONG, TastyToast.SUCCESS).show();
-                                        SharedPrefManager.getInstance(getActivity()).getUserBloodRequest(
-                                                jsonObject.getString("name"),
-                                                jsonObject.getString("mobile"),
-                                                jsonObject.getString("blood_group"),
-                                                jsonObject.getString("blood_bottle"),
-                                                jsonObject.getString("city"),
-                                                jsonObject.getString("hospital")
-                                        );
-                                    } else if (jsonObject.getString("error") == "true") {
-                                        TastyToast.makeText(getActivity(), jsonObject.getString("message")
-                                                , Toast.LENGTH_LONG, TastyToast.ERROR).show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                ((MainActivity) getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
-                                ((MainActivity) getActivity()).onNavigationItemSelected(((MainActivity) getActivity()).navigationView.getMenu().getItem(0));
-                                fragmentManager
-                                        .beginTransaction()
-                                        .replace(R.id.container, new Home_Fragment(), Utils.Home_Fragment).commit();
-                                fragmentManager.popBackStack(null
-                                        , FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                progressDialog.hide();
-                                if (getActivity() != null) {
-                                    TastyToast.makeText(getActivity(), error.getMessage()
+            progressDialog.setMessage("Updating request...");
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+            StringRequest stringRequest = new StringRequest(
+                    Request.Method.POST,
+                    Paths.BLOOD_BAGS_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            progressDialog.dismiss();
+                            try {
+                                JSONObject obj = new JSONObject(response);
+                                if (obj.getString("error") == "false") {
+                                    TastyToast.makeText(getActivity(), obj.getString("message")
+                                            , Toast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                                    SharedPrefManager.getInstance(getActivity()).getUserBloodRequest(
+                                            obj.getString("mobile"),
+                                            obj.getString("blood_group"),
+                                            obj.getString("blood_bottle"),
+                                            obj.getString("city"),
+                                            obj.getString("hospital")
+                                    );
+                                } else if (obj.getString("error") == "true") {
+                                    TastyToast.makeText(getActivity(), obj.getString("message")
                                             , Toast.LENGTH_LONG, TastyToast.ERROR).show();
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("name", SharedPrefManager.getInstance(getActivity()).getName());
-                        params.put("mobile", SharedPrefManager.getInstance(getActivity()).getMobile());
-                        params.put("blood_group", strBlood);
-                        params.put("blood_bottle", strBlood);
-                        params.put("city", strCity);
-                        params.put("hospital", et_hospital.getText().toString());
-                        return params;
+                            ((MainActivity) getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
+                            ((MainActivity) getActivity()).onNavigationItemSelected(((MainActivity) getActivity()).navigationView.getMenu().getItem(0));
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.container, new Home_Fragment(), Utils.Home_Fragment).commit();
+                            fragmentManager.popBackStack(null
+                                    , FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
+                            if (getActivity() != null) {
+                                Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
-                };
-                RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
-            }
+            ) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("mobile", SharedPrefManager.getInstance(getActivity()).getMobile());
+                    params.put("blood_group", strBlood);
+                    params.put("blood_bottle", et_blood_bags.getText().toString());
+                    params.put("city", strCity);
+                    params.put("hospital", et_hospital.getText().toString());
+                    return params;
+                }
+            };
+            Volley.newRequestQueue(getActivity()).add(stringRequest);
         } else {
             Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_SHORT).show();
         }

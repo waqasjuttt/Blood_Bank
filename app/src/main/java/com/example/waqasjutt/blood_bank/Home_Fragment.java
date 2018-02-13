@@ -31,6 +31,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +100,7 @@ public class Home_Fragment extends Fragment {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         checkInternet();
+        CheckInternetForBloodRequest();
 
 //        Toast.makeText(getActivity(), "Name: " + SharedPrefManager.getInstance(getActivity()).getName()
 //                + "\nMobile: " + SharedPrefManager.getInstance(getActivity()).getMobile()
@@ -183,6 +186,7 @@ public class Home_Fragment extends Fragment {
                     public void run() {
                         Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
                         checkInternet();
+                        CheckInternetForBloodRequest();
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 4000);
@@ -205,6 +209,47 @@ public class Home_Fragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void CheckInternetForBloodRequest() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+            StringRequest stringRequest = new StringRequest(
+                    Request.Method.POST,
+                    Paths.USER_BLOOD_REQUEST_DETAILS_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject obj = new JSONObject(response);
+                                SharedPrefManager.getInstance(getActivity()).getUserBloodRequest(
+                                        obj.getString("mobile"),
+                                        obj.getString("blood_group"),
+                                        obj.getString("blood_bottle"),
+                                        obj.getString("city"),
+                                        obj.getString("hospital")
+                                );
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                        }
+                    }
+            ) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("mobile", SharedPrefManager.getInstance(getActivity()).getMobile());
+                    return params;
+                }
+            };
+            Volley.newRequestQueue(getActivity()).add(stringRequest);
+        }
     }
 
     public void checkInternet() {

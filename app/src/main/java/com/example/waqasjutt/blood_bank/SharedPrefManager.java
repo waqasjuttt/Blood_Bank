@@ -34,22 +34,20 @@ public class SharedPrefManager {
     }
 
     public boolean getUserBloodRequest(
-            String name,
             String mobile,
             String bloodGroup,
             String blood_bottle,
             String city,
             String hospital) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putString(KEY_FULL_NAME, name);
         editor.putString(KEY_MOBILE, mobile);
         editor.putString(KEY_BLOOD_TYPE_REQUEST, bloodGroup);
         editor.putString(KEY_BLOOD_BAGS, blood_bottle);
         editor.putString(KEY_CITY_REQUEST, city);
         editor.putString(KEY_HOSPITAL, hospital);
-        editor.commit();
+        editor.apply();
         return true;
     }
 
@@ -108,8 +106,8 @@ public class SharedPrefManager {
     }
 
     public String getCityRequest() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_CITY_REQUEST, null);
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return preferences.getString(KEY_CITY_REQUEST, null);
     }
 
     public String getBloodTypeRequest() {
@@ -118,13 +116,13 @@ public class SharedPrefManager {
     }
 
     public String getHospital() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_HOSPITAL, null);
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return preferences.getString(KEY_HOSPITAL, null);
     }
 
     public String getBloodBags() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_BLOOD_BAGS, null);
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return preferences.getString(KEY_BLOOD_BAGS, null);
     }
 
     public String getID() {

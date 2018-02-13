@@ -10,4 +10,6 @@ public class Paths {
     public static final String EDIT_PROFILE_URL = URL + "EditProfile.php";
     public static final String A_PLUS_DONORS_LIST_URL = URL + "AplusDonorsList.php";
     public static final String UPDATE_PASSWORD_URL = URL + "UpdatePassword.php";
+    public static final String BLOOD_BAGS_URL = URL + "Blood_Bags.php";
+    public static final String USER_BLOOD_REQUEST_DETAILS_URL = URL + "userBloodRequestDetails.php";
 }
