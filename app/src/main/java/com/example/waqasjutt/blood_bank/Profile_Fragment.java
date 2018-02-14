@@ -230,6 +230,9 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener {
                 || !et_name.getText().toString().contains("New User"))
                 && CitySpinner.getText().toString().isEmpty()) {
             Toast.makeText(getActivity(), "All fields are require.", Toast.LENGTH_SHORT).show();
+        } else if (!et_name.getText().toString().isEmpty()
+                || !et_name.getText().toString().contains("New User")) {
+            checkInternet();
         }
     }
 
