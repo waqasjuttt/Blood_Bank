@@ -6,20 +6,14 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,13 +32,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class A_Plus_Blood_Fragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
-    private Blood_Adapter blood_adapter;
+    private Blood_Donors_Adapter blood_adapter;
     private ListView listView;
     private EditText et_search;
 
@@ -140,7 +132,7 @@ public class A_Plus_Blood_Fragment extends Fragment {
                                 listView.setVisibility(View.VISIBLE);
                                 et_search.setEnabled(true);
                                 et_search.setVisibility(View.VISIBLE);
-                                ArrayList<Blood_Items> blood_itemsArrayList = new ArrayList<>();
+                                ArrayList<Blood_Donors_Items> blood_itemsArrayList = new ArrayList<>();
                                 //converting the string to json array object
                                 JSONArray array = new JSONArray(response);
 
@@ -150,7 +142,7 @@ public class A_Plus_Blood_Fragment extends Fragment {
                                     //getting product object from json array
                                     JSONObject jsonObject = array.getJSONObject(i);
 
-                                    Blood_Items blood_items = new Blood_Items();
+                                    Blood_Donors_Items blood_items = new Blood_Donors_Items();
                                     blood_items.setName(jsonObject.getString("name"));
                                     blood_items.setMobile(jsonObject.getString("mobile"));
                                     blood_items.setBlood_group(jsonObject.getString("blood_group"));
@@ -158,7 +150,7 @@ public class A_Plus_Blood_Fragment extends Fragment {
                                     blood_items.setAddress(jsonObject.getString("address"));
                                     blood_itemsArrayList.add(blood_items);
                                 }
-                                blood_adapter = new Blood_Adapter(getActivity(), R.layout.blood_item_details, blood_itemsArrayList);
+                                blood_adapter = new Blood_Donors_Adapter(getActivity(), R.layout.blood_item_details, blood_itemsArrayList);
                                 listView.setAdapter(blood_adapter);
                             } catch (JSONException e) {
                                 e.printStackTrace();

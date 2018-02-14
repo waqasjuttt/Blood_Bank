@@ -1,7 +1,7 @@
 package com.example.waqasjutt.blood_bank;
 
 public class Paths {
-    private static final String URL = "http://192.168.170.102/Blood_Bank_PHP/Blood_Bank/";
+    private static final String URL = "http://192.168.170.103/Blood_Bank_PHP/Blood_Bank/";
 
     public static final String LOGIN_URL = URL + "userLogin.php";
     public static final String SIGNUP_URL = URL + "registerUser.php";

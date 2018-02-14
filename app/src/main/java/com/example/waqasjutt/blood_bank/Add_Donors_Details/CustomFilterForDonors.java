@@ -4,12 +4,12 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 
-public class CustomFilter extends Filter {
+public class CustomFilterForDonors extends Filter {
 
-    Blood_Adapter adapter;
-    ArrayList<Blood_Items> filterList;
+    Blood_Donors_Adapter adapter;
+    ArrayList<Blood_Donors_Items> filterList;
 
-    public CustomFilter(ArrayList<Blood_Items> filterList, Blood_Adapter adapter) {
+    public CustomFilterForDonors(ArrayList<Blood_Donors_Items> filterList, Blood_Donors_Adapter adapter) {
         this.adapter = adapter;
         this.filterList = filterList;
     }
@@ -24,7 +24,7 @@ public class CustomFilter extends Filter {
             //CHANGE TO UPPER
             constraint = constraint.toString().toUpperCase();
             //STORE OUR FILTERED PLAYERS
-            ArrayList<Blood_Items> filteredBlood = new ArrayList<>();
+            ArrayList<Blood_Donors_Items> filteredBlood = new ArrayList<>();
 
             for (int i = 0; i < filterList.size(); i++) {
                 //CHECK
@@ -46,7 +46,7 @@ public class CustomFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        adapter.blood_itemses = (ArrayList<Blood_Items>) results.values;
+        adapter.blood_itemses = (ArrayList<Blood_Donors_Items>) results.values;
         //REFRESH
         adapter.notifyDataSetChanged();
     }

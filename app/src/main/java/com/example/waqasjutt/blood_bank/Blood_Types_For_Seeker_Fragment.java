@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.waqasjutt.blood_bank.Add_Donors_Details.A_Plus_Blood_Fragment;
+import com.example.waqasjutt.blood_bank.Blood_Seeker_Details.A_Plus_Blood_Seeker_Fragment;
 
 public class Blood_Types_For_Seeker_Fragment extends Fragment {
 
@@ -51,7 +52,7 @@ public class Blood_Types_For_Seeker_Fragment extends Fragment {
             public void onClick(View view) {
                 fragmentTransaction = fragmentManager
                         .beginTransaction()
-                        .replace(R.id.container, new A_Plus_Blood_Fragment());
+                        .replace(R.id.container, new A_Plus_Blood_Seeker_Fragment());
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });

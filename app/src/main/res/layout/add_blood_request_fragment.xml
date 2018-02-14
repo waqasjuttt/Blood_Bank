@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.example.waqasjutt.blood_bank.Add_Blood_Request_Fragment">
 
     <LinearLayout
@@ -30,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:hint="Full Name"
-                android:textColor="#f00"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="#f00" />
         </android.support.design.widget.TextInputLayout>
 
         <View

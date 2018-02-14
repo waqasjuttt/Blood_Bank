@@ -108,7 +108,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:background="@drawable/home"
+                        android:background="@drawable/hostpital"
                         android:padding="4dp" />
 
                     <TextView
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="3dp"
-                        android:text="Address"
+                        android:text="Hospital"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="#2d2b2b" />
                 </LinearLayout>
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:text="Blood Bags"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="#2d2b2b" />
@@ -159,7 +159,7 @@
                     android:layout_marginRight="10dp">
 
                     <TextView
-                        android:id="@+id/imageView_Mobile"
+                        android:id="@+id/tv_Mobile"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="10dp"

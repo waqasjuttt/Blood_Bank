@@ -148,14 +148,14 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
             }
         });
 
-        et_blood_bags.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
+//        et_blood_bags.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    hideKeyboard(v);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -169,8 +169,48 @@ public class Add_Blood_Request_Fragment extends Fragment implements View.OnClick
                 break;
 
             case R.id.btnSaveBloodBags:
-                checkInternet();
+                CheckFields();
                 break;
+        }
+    }
+
+    private void CheckFields() {
+        if (et_blood_bags.getText().toString().isEmpty()
+                && BloodSpinner.getText().toString().isEmpty()
+                && CitySpinner.getText().toString().isEmpty()
+                && et_hospital.getText().toString().isEmpty()) {
+            CitySpinner.setText("");
+            BloodSpinner.setText("");
+            et_blood_bags.setText("");
+            et_hospital.setText("");
+            checkInternet();
+        } else if (BloodSpinner.getText().toString().isEmpty()
+                || CitySpinner.getText().toString().isEmpty()
+                || et_hospital.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), "All fields are require.", Toast.LENGTH_SHORT).show();
+        } else if (!et_blood_bags.getText().toString().isEmpty()) {
+            CheckValidation();
+        }
+    }
+
+    private void CheckValidation() {
+        int intBloodBags = Integer.parseInt(et_blood_bags.getText().toString());
+
+        if (intBloodBags > 10) {
+            et_blood_bags.setError("You can add max 10 blood bags.");
+        } else if (et_hospital.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), "Enter hospital name.", Toast.LENGTH_SHORT).show();
+        } else if (CitySpinner.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), "Select your city.", Toast.LENGTH_SHORT).show();
+        } else if (BloodSpinner.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), "Select blood type.", Toast.LENGTH_SHORT).show();
+        } else if (intBloodBags < 11
+                && !BloodSpinner.getText().toString().isEmpty()
+                && !CitySpinner.getText().toString().isEmpty()
+                && !et_hospital.getText().toString().isEmpty()) {
+            checkInternet();
+        } else {
+            et_blood_bags.setError(null);
         }
     }
 

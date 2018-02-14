@@ -173,7 +173,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnSave:
-                checkInternet();
+                CheckValidation();
                 break;
 
             case R.id.btn_DOB:
@@ -183,95 +183,121 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void CheckValidation() {
+        if (et_name.getText().toString().isEmpty()) {
+            et_name.setText("New User");
+        }
+
+        strCity = CitySpinner.getText().toString();
+        strBlood = BloodSpinner.getText().toString();
+        strDt = tv_DOB.getText().toString();
+
+        if (tv_DOB.getText().toString().contains("Your are not allowed to donate blood because you are")) {
+            strDt = "Your are not allowed to donate blood because you are not 18 years old.";
+            strCity = "";
+            strBlood = "";
+            et_name.setText("");
+            et_address.setText("");
+        } else if (!BloodSpinner.getText().toString().isEmpty()
+                && (tv_DOB.getText().toString().contains("Pick your date of birth")
+                || tv_DOB.getText().toString().contains("Your are not allowed to donate blood because you are"))) {
+            et_name.setText("");
+            Toast.makeText(getActivity(), "Select your date of birth.", Toast.LENGTH_SHORT).show();
+        } else if (!BloodSpinner.getText().toString().isEmpty()
+                && (!tv_DOB.getText().toString().contains("Pick your date of birth")
+                || !tv_DOB.getText().toString().contains("Your are not allowed to donate blood because you are"))
+                && !CitySpinner.getText().toString().isEmpty()
+                && !et_name.getText().toString().isEmpty()) {
+            checkInternet();
+        } else if (BloodSpinner.getText().toString().isEmpty()
+                && tv_DOB.getText().toString().contains("Pick your date of birth")
+                && CitySpinner.getText().toString().isEmpty()
+                && (et_name.getText().toString().isEmpty()
+                || et_name.getText().toString().contains("New User"))
+                && et_address.getText().toString().isEmpty()) {
+            checkInternet();
+        } else if (!BloodSpinner.getText().toString().isEmpty()
+                && (!tv_DOB.getText().toString().contains("Pick your date of birth")
+                || !tv_DOB.getText().toString().contains("Your are not allowed to donate blood because you are"))
+                && (et_name.getText().toString().isEmpty()
+                || et_name.getText().toString().contains("New User"))) {
+            et_name.setText("");
+            Toast.makeText(getActivity(), "All fields are require.", Toast.LENGTH_SHORT).show();
+        } else if (!BloodSpinner.getText().toString().isEmpty()
+                && (!tv_DOB.getText().toString().contains("Pick your date of birth")
+                || !tv_DOB.getText().toString().contains("Your are not allowed to donate blood because you are"))
+                && (!et_name.getText().toString().isEmpty()
+                || !et_name.getText().toString().contains("New User"))
+                && CitySpinner.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), "All fields are require.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void checkInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
-            if (et_name.getText().toString().isEmpty()) {
-                et_name.setText("New User");
-            }
-
-            strCity = CitySpinner.getText().toString();
-            strBlood = BloodSpinner.getText().toString();
-            strDt = tv_DOB.getText().toString();
-
-            if (tv_DOB.getText().toString().contains("Your are not allowed to donate blood because you are")) {
-                strDt = "Your are not allowed to donate blood because you are not 18 years old.";
-                strCity = "";
-                strBlood = "";
-                et_name.setText("");
-                et_address.setText("");
-            } else {
-//                Toast.makeText(getActivity(), "Name: " + et_name.getText().toString()
-//                        + "\nMobile: " + et_mobile.getText().toString()
-//                        + "\nAddress: " + et_address.getText().toString()
-//                        + "\nCity: " + strCity
-//                        + "\nBlood: " + strBlood
-//                        + "\nDOB: " + strDt, Toast.LENGTH_LONG).show();
-
-                progressDialog.setMessage("Updating profile...");
-                progressDialog.show();
-                progressDialog.setCanceledOnTouchOutside(false);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        Paths.EDIT_PROFILE_URL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                progressDialog.dismiss();
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    if (jsonObject.getString("error") == "false") {
-                                        TastyToast.makeText(getActivity(), jsonObject.getString("message")
-                                                , Toast.LENGTH_LONG, TastyToast.SUCCESS).show();
-                                        SharedPrefManager.getInstance(getActivity()).getUserData(
-                                                jsonObject.getString("id"),
-                                                jsonObject.getString("name"),
-                                                jsonObject.getString("mobile"),
-                                                jsonObject.getString("city"),
-                                                jsonObject.getString("address"),
-                                                jsonObject.getString("blood_group"),
-                                                jsonObject.getString("dob")
-                                        );
-                                    } else if (jsonObject.getString("error") == "true") {
-                                        TastyToast.makeText(getActivity(), jsonObject.getString("message")
-                                                , Toast.LENGTH_LONG, TastyToast.ERROR).show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+            progressDialog.setMessage("Updating profile...");
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                    Paths.EDIT_PROFILE_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            progressDialog.dismiss();
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (jsonObject.getString("error") == "false") {
+                                    TastyToast.makeText(getActivity(), jsonObject.getString("message")
+                                            , Toast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                                    SharedPrefManager.getInstance(getActivity()).getUserData(
+                                            jsonObject.getString("id"),
+                                            jsonObject.getString("name"),
+                                            jsonObject.getString("mobile"),
+                                            jsonObject.getString("city"),
+                                            jsonObject.getString("address"),
+                                            jsonObject.getString("blood_group"),
+                                            jsonObject.getString("dob")
+                                    );
+                                } else if (jsonObject.getString("error") == "true") {
+                                    TastyToast.makeText(getActivity(), jsonObject.getString("message")
+                                            , Toast.LENGTH_LONG, TastyToast.ERROR).show();
                                 }
-                                ((MainActivity) getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
-                                ((MainActivity) getActivity()).onNavigationItemSelected(((MainActivity) getActivity()).navigationView.getMenu().getItem(0));
-                                fragmentManager
-                                        .beginTransaction()
-                                        .replace(R.id.container, new Home_Fragment(), Utils.Home_Fragment).commit();
-                                fragmentManager.popBackStack(null
-                                        , FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                progressDialog.hide();
-                                if (getActivity() != null) {
-                                    Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
-                                }
+                            ((MainActivity) getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
+                            ((MainActivity) getActivity()).onNavigationItemSelected(((MainActivity) getActivity()).navigationView.getMenu().getItem(0));
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.container, new Home_Fragment(), Utils.Home_Fragment).commit();
+                            fragmentManager.popBackStack(null
+                                    , FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
+                            if (getActivity() != null) {
+                                Toast.makeText(getActivity(), "Server is not responding", Toast.LENGTH_SHORT).show();
                             }
-                        }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("name", et_name.getText().toString());
-                        params.put("mobile", SharedPrefManager.getInstance(getActivity()).getMobile());
-                        params.put("blood_group", strBlood);
-                        params.put("city", strCity);
-                        params.put("address", et_address.getText().toString());
-                        params.put("dob", strDt);
-                        return params;
-                    }
-                };
-                RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
-            }
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("name", et_name.getText().toString());
+                    params.put("mobile", SharedPrefManager.getInstance(getActivity()).getMobile());
+                    params.put("blood_group", strBlood);
+                    params.put("city", strCity);
+                    params.put("address", et_address.getText().toString());
+                    params.put("dob", strDt);
+                    return params;
+                }
+            };
+            RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_SHORT).show();
         }

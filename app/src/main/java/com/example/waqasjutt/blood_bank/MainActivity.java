@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
+        CustomDialog_Class customDialog_class = new CustomDialog_Class(this);
+
 //        i = (i + 1);
 //        Toast.makeText(getApplicationContext(),
 //                " Press Back again to Exit ", Toast.LENGTH_SHORT).show();
@@ -86,18 +88,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
-        } else if (Login_Fragment != null && back_pressed + 1000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-        } else if (Home_Fragment != null && back_pressed + 1000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-        } else if (back_pressed + 1000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-        } else {
-            Toast.makeText(getBaseContext(),
-                    "Press once again to exit!", Toast.LENGTH_SHORT)
-                    .show();
+        } else if (Login_Fragment != null) {
+            customDialog_class.show();
+            customDialog_class.setCanceledOnTouchOutside(false);
+        } else if (Home_Fragment != null) {
+            customDialog_class.show();
+            customDialog_class.setCanceledOnTouchOutside(false);
         }
-        back_pressed = System.currentTimeMillis();
+//        else if (back_pressed + 1000 > System.currentTimeMillis()) {
+//            super.onBackPressed();
+//        }
+        else {
+            customDialog_class.show();
+            customDialog_class.setCanceledOnTouchOutside(false);
+//            Toast.makeText(getBaseContext(),
+//                    "Press once again to exit!", Toast.LENGTH_SHORT)
+//                    .show();
+        }
+//        back_pressed = System.currentTimeMillis();
     }
 
     @Override
